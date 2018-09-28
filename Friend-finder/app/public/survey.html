@@ -37,7 +37,7 @@
 
         <h3><strong>Question 1</strong></h3>
         <h4>You like hiking and outdoors.</h4>
-        <select data-placeholder="" class="chosen-select" id="q1">
+        <select data-placeholder="" class="chosen-select" id="q0">
             <option value=""></option>
             <option value="1">1 (Strongly Disagree)</option>
             <option value="2">2</option>
@@ -57,9 +57,21 @@
             <option value="5">5 (Strongly Agree)</option>
         </select>
         <hr>
+        <hr>
+        <h3><strong>Question 3</strong></h3>
+        <h4>You love swimming.</h4>
+        <select data-placeholder="" class="chosen-select" id="q2">
+            <option value=""></option>
+            <option value="1">1 (Strongly Disagree)</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5 (Strongly Agree)</option>
+        </select>
+        <hr>
         <h3><strong>Question 4</strong></h3>
         <h4>You like to explore local restaurants.</h4>
-        <select data-placeholder="" class="chosen-select" id="q1">
+        <select data-placeholder="" class="chosen-select" id="q3">
             <option value=""></option>
             <option value="1">1 (Strongly Disagree)</option>
             <option value="2">2</option>
@@ -70,7 +82,7 @@
         <hr>
         <h3><strong>Question 5</strong></h3>
         <h4>You are an introvert.</h4>
-        <select data-placeholder="" class="chosen-select" id="q1">
+        <select data-placeholder="" class="chosen-select" id="q4">
             <option value=""></option>
             <option value="1">1 (Strongly Disagree)</option>
             <option value="2">2</option>
@@ -81,7 +93,7 @@
         <hr>
         <h3><strong>Question 6</strong></h3>
         <h4>You like animals especially dogs.</h4>
-        <select data-placeholder="" class="chosen-select" id="q1">
+        <select data-placeholder="" class="chosen-select" id="q5">
             <option value=""></option>
             <option value="1">1 (Strongly Disagree)</option>
             <option value="2">2</option>
@@ -92,7 +104,7 @@
         <hr>
         <h3><strong>Question 7</strong></h3>
         <h4>You tend to binge on Netflix/Hulu shows (sometimes).</h4>
-        <select data-placeholder="" class="chosen-select" id="q1">
+        <select data-placeholder="" class="chosen-select" id="q6">
             <option value=""></option>
             <option value="1">1 (Strongly Disagree)</option>
             <option value="2">2</option>
@@ -103,7 +115,7 @@
         <hr>
         <h3><strong>Question 8</strong></h3>
         <h4>You love Chicago sports teams.</h4>
-        <select data-placeholder="" class="chosen-select" id="q1">
+        <select data-placeholder="" class="chosen-select" id="q7">
             <option value=""></option>
             <option value="1">1 (Strongly Disagree)</option>
             <option value="2">2</option>
@@ -114,7 +126,7 @@
         <hr>
         <h3><strong>Question 9</strong></h3>
         <h4>You love good music.</h4>
-        <select data-placeholder="" class="chosen-select" id="q1">
+        <select data-placeholder="" class="chosen-select" id="q8">
             <option value=""></option>
             <option value="1">1 (Strongly Disagree)</option>
             <option value="2">2</option>
@@ -125,7 +137,7 @@
         <hr>
         <h3><strong>Question 10</strong></h3>
         <h4>You are a sympathetic person.</h4>
-        <select data-placeholder="" class="chosen-select" id="q1">
+        <select data-placeholder="" class="chosen-select" id="q9">
             <option value=""></option>
             <option value="1">1 (Strongly Disagree)</option>
             <option value="2">2</option>
@@ -188,11 +200,12 @@
         $("#submit").on("click", function (event) {
             event.preventDefault();
             // Form validation
+            console.log('On click works');
             var validate = true;
 
             if ($("#name").val() === "" || $("#photo").val() === "") {
                 validate = false;
-            } else if ($("question1").val() === "empty" || $("#question2").val() === "empty" || $("#question3").val() === "empty" || $("#question4").val() === "empty" || $("question5").val() === "empty" || $("#question6").val() === "empty" || $("#question7").val() === "empty" || $("question8").val() === "empty" || $("#question9").val() === "empty" || $("#question10").val() === "empty") {
+            } else if ($("q0").val() === "empty" || $("#q1").val() === "empty" || $("#q2").val() === "empty" || $("#q3").val() === "empty" || $("q4").val() === "empty" || $("#q5").val() === "empty" || $("#q6").val() === "empty" || $("q7").val() === "empty" || $("#q8").val() === "empty" || $("#q9").val() === "empty") {
                 validate = false;
             }
 
@@ -201,16 +214,16 @@
                     name: $("#name").val().trim(),
                     photo: $("#photo").val().trim(),
                     scores: [
-                        $("#question1").val(),
-                        $("#question2").val(),
-                        $("#question3").val(),
-                        $("#question4").val(),
-                        $("#question5").val(),
-                        $("#question6").val(),
-                        $("#question7").val(),
-                        $("#question8").val(),
-                        $("#question9").val(),
-                        $("#question10").val(),
+                        $("#q0").val(),
+                        $("#q1").val(),
+                        $("#q2").val(),
+                        $("#q3").val(),
+                        $("#q4").val(),
+                        $("#q5").val(),
+                        $("#q6").val(),
+                        $("#q7").val(),
+                        $("#q8").val(),
+                        $("#q9").val(),
                     ]
                 };
 
@@ -220,7 +233,7 @@
                 $.post(currentURL + "/api/friends", newFriend, function (data) {
                     //Result  to display match's name and photo
                     $("#match").text(data.name);
-                    $("#matchPhoto").attr("src" data.photo);
+                    $("#matchPhoto").attr("src", data.photo);
                     $("#matchModal").modal("toggle");
                 });
 
